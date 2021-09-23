@@ -7,6 +7,7 @@
 #include <QDir>
 
 #include <QMessageBox>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,6 +25,7 @@ private slots:
     void on_pushButton_install_clicked();
 
 private:
+    void askForUserPassword();
     void installLibrary();
     void makeLibraryDirectory();
 
@@ -34,17 +36,13 @@ private:
     void installIcon();
     void installDesktopFile();
 
-    void linkDesktopFile();
-    void linkIcon();
-    void linkBinary();
+    bool checkInstallation() const;
 
 private:
     Ui::MainWindow *ui;
 
     QString transliteratorLibraryPath = "/usr/lib/transliterator";
 
-    QString userPassword;
-
-    QProcess process;
+    QString userPassword = "****";
 };
 #endif // MAINWINDOW_H

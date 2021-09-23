@@ -6,8 +6,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    process.open(QIODevice::WriteOnly);
 }
 
 MainWindow::~MainWindow()
@@ -50,13 +48,12 @@ void MainWindow::installDesktopFile()
 
     desktopFile.copy("tmp/transliterator.desktop");
 
-    process.start("sudo cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop");
-    process.waitForReadyRead();
-    process.write("****");
-    process.waitForFinished();
+    QString installPath = "/usr/share/applications/transliterator.desktop";
 
-    process.start("rm /tmp/transliterator.desktop");
-    process.waitForFinished();
+    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.png " + installPath + "\"";
+    QProcess::execute(command);
+
+    QProcess::execute("rm /tmp/transliterator.desktop");
 }
 
 void MainWindow::installIcon()
@@ -65,14 +62,12 @@ void MainWindow::installIcon()
 
     image.copy("/tmp/transliterator.png");
 
-    process.start("sudo cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png");
+    QString installPath = "/usr/share/icons/hicolor/32x32/apps/transliterator.png";
 
-    process.waitForReadyRead();
-    process.write("****");
-    process.waitForFinished();
+    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.png " + installPath + "\"";
+    QProcess::execute(command);
 
-    process.start("rm /tmp/transliterator.png");
-    process.waitForFinished();
+    QProcess::execute("rm /tmp/transliterator.png");
 }
 
 void MainWindow::installBinary()
@@ -80,13 +75,10 @@ void MainWindow::installBinary()
     QFile binary(":/Transliterator");
     binary.copy("/tmp/transliterator");
 
-    process.setProgram("sudo");
-    process.setArguments({"cp", "/tmp/transliterator /usr/bin/transliterator"});
-    process.start(QIODevice::WriteOnly);
-    process.waitForReadyRead();
-    process.write("****");
-    process.waitForFinished();
+    QString installPath = "/usr/bin/transliterator";
 
-    process.start("rm /tmp/transliterator");
-    process.waitForFinished();
+    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator " + installPath + "\"";
+    QProcess::execute(command);
+
+    QProcess::execute("rm /tmp/transliterator");
 }
