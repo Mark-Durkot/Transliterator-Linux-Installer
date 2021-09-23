@@ -51,7 +51,8 @@ void MainWindow::installDesktopFile()
 
     desktopFile.copy("tmp/transliterator.desktop");
 
-    process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop"});
+    process.start("cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop");
+    //process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop"});
     process.waitForFinished();
 
     process.start("rm /tmp/transliterator.desktop");
@@ -63,7 +64,9 @@ void MainWindow::installIcon()
     QFile image(":/Transliterator.png");
 
     image.copy("/tmp/transliterator.png");
-    process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png"});
+
+    process.start("cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png");
+    //process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png"});
     process.waitForFinished();
 
     process.start("rm /tmp/transliterator.png");
@@ -75,7 +78,8 @@ void MainWindow::installBinary()
     QFile binary(":/Transliterator");
     binary.copy("/tmp/transliterator");
 
-    process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator /usr/bin/transliterator"});
+    process.start("cp /tmp/transliterator /usr/bin/transliterator");
+    //process.start("/bin/sh", {"echo **** | sudo -S cp /tmp/transliterator /usr/bin/transliterator"});
     process.waitForFinished();
 
     process.start("rm /tmp/transliterator");
