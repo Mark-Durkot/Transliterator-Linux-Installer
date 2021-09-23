@@ -16,34 +16,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_install_clicked()
 {
-    installLibrary();
-}
-
-void MainWindow::installLibrary()
-{
-    PasswordDialog passwordDialog(userPassword, this);
-    passwordDialog.exec();
-
+    askForUserPassword();
     installBinary();
     installIcon();
     installDesktopFile();
     updateDesktopDatabase();
 }
 
-void MainWindow::makeLibraryDirectory()
+void MainWindow::askForUserPassword()
 {
-
-}
-
-void MainWindow::installFile(const QString &filename)
-{
-    QFile file(filename);
-    file.copy("/usr/lib/transliterator/" + filename);
-}
-
-void MainWindow::linkFile(const QString &filename, const QString &aliasname)
-{
-    QFile::link(filename, aliasname);
+    PasswordDialog passwordDialog(userPassword, this);
+    passwordDialog.exec();
 }
 
 void MainWindow::installDesktopFile()

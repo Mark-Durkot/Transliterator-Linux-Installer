@@ -28,21 +28,15 @@ private slots:
 
 private:
     void askForUserPassword();
-    void installLibrary();
-    void makeLibraryDirectory();
-
-    void installFile(const QString &filename);
-    void linkFile(const QString &filename, const QString &alias);
 
     void installBinary();
     void installIcon();
     void installDesktopFile();
-    void updateDesktopDatabase();
 
-    bool checkInstallation() const;
+    void updateDesktopDatabase();
 
 private:
     Ui::MainWindow *ui;
-    QString userPassword = "****";
+    QString userPassword;
 };
 #endif // MAINWINDOW_H
