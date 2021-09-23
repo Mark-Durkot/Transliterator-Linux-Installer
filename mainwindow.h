@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "passworddialog.h"
+
 #include <QMainWindow>
 #include <QProcess>
 #include <QFile>
