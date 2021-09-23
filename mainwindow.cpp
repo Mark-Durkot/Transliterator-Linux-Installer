@@ -41,7 +41,7 @@ void MainWindow::makeLibraryDirectory()
 
     QDir usrLibDirectory("/usr/lib/transliterator");
 
-    process.start("echo **** | sudo -S mkdir " + transliteratorLibraryPath);
+    QProcess::startDetached("echo **** | sudo -S mkdir " + transliteratorLibraryPath);
 
 //    if (usrLibDirectory.exists())
 //    {
