@@ -6,6 +6,8 @@
 #include <QFile>
 #include <QDir>
 
+#include <QMessageBox>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -42,5 +44,7 @@ private:
     QString transliteratorLibraryPath = "/usr/lib/transliterator";
 
     QString userPassword;
+
+    QProcess process;
 };
 #endif // MAINWINDOW_H

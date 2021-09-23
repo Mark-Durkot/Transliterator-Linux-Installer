@@ -16,7 +16,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_install_clicked()
 {
+    process.start("echo **** | sudo -S -s");
+    process.waitForFinished();
 
+    installLibrary();
 }
 
 void MainWindow::installLibrary()
