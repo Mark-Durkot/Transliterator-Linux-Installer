@@ -37,19 +37,21 @@ void MainWindow::installLibrary()
 
 void MainWindow::makeLibraryDirectory()
 {
-    QString usrLibDirectoryPath = "/usr/lib/transliterator";
+    QString usrLibDirectoryPath = "/usr/lib/transliterator/";
 
     QDir usrLibDirectory("/usr/lib/transliterator");
 
-    if (usrLibDirectory.exists())
-    {
-        throw "The application seems to be already installed\nDirectory /usr/lib/transliterator/ already exists";
-    }
+    process.start("echo **** | sudo -S mkdir " + transliteratorLibraryPath);
 
-    if (!usrLibDirectory.mkdir(usrLibDirectoryPath))
-    {
-        throw "Failed to install the libraries";
-    }
+//    if (usrLibDirectory.exists())
+//    {
+//        throw "The application seems to be already installed\nDirectory /usr/lib/transliterator/ already exists";
+//    }
+
+//    if (!usrLibDirectory.mkdir(usrLibDirectoryPath))
+//    {
+//        throw "Failed to install the libraries";
+//    }
 }
 
 void MainWindow::installFile(const QString &filename)
