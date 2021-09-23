@@ -41,9 +41,6 @@ private:
 
 private:
     Ui::MainWindow *ui;
-
-    QString transliteratorLibraryPath = "/usr/lib/transliterator";
-
     QString userPassword = "****";
 };
 #endif // MAINWINDOW_H

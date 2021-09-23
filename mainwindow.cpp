@@ -21,6 +21,9 @@ void MainWindow::on_pushButton_install_clicked()
 
 void MainWindow::installLibrary()
 {
+    PasswordDialog passwordDialog(userPassword, this);
+    passwordDialog.exec();
+
     installBinary();
     installIcon();
     installDesktopFile();
