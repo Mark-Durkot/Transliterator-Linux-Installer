@@ -25,6 +25,9 @@ private:
     void installLibrary();
     void makeLibraryDirectory();
 
+    void installFile(const QString &filename);
+    void linkFile(const QString &filename, const QString &alias);
+
     void installBinary();
     void installIcon();
     void installDesktopFile();
