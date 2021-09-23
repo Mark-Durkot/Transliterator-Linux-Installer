@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Transliterator</file>
+        <file>Transliterator_1024.png</file>
+        <file>Transliterator.desktop</file>
+        <file>Transliterator.png</file>
+    </qresource>
+</RCC>

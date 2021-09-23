@@ -26,32 +26,14 @@ void MainWindow::installLibrary()
 {
     makeLibraryDirectory();
 
-//    installFile("transliterator");
-//    installFile("transliterator.desktop");
-//    installFile("transliterator.png");
-
-//    linkFile("/usr/lib/transliterator/transliterator", "/usr/bin/transliterator");
-//    linkFile("/usr/lib/trasnliterator/transliterator.desktop", "/usr/share/applications/transliterator.desktop");
-//    linkFile("/usr/bin/transliterator/transliterator.png", "/usr/share/incons/hicolor/256x256/apps/transliterator.png");
+    installBinary();
+    installDesktopFile();
+    installIcon();
 }
 
 void MainWindow::makeLibraryDirectory()
 {
-    QString usrLibDirectoryPath = "/usr/lib/transliterator/";
 
-    QDir usrLibDirectory("/usr/lib/transliterator");
-
-    QProcess::startDetached("echo **** | sudo -S mkdir " + transliteratorLibraryPath);
-
-//    if (usrLibDirectory.exists())
-//    {
-//        throw "The application seems to be already installed\nDirectory /usr/lib/transliterator/ already exists";
-//    }
-
-//    if (!usrLibDirectory.mkdir(usrLibDirectoryPath))
-//    {
-//        throw "Failed to install the libraries";
-//    }
 }
 
 void MainWindow::installFile(const QString &filename)
@@ -68,19 +50,36 @@ void MainWindow::linkFile(const QString &filename, const QString &aliasname)
 void MainWindow::installDesktopFile()
 {
     QFile desktopFile("Transliterator.desktop");
-    desktopFile.copy("/usr/share/applications/Transliterator.desktop");
+
+    desktopFile.copy("tmp/transliterator.desktop");
+
+    process.start("echo **** | sudo -S cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop");
+    process.waitForFinished();
+
+    process.start("rm /tmp/transliterator.desktop");
+    process.waitForFinished();
 }
 
 void MainWindow::installIcon()
 {
-    QFile image("/Users/md/Desktop/Transliterator_logo.png");
+    QFile image(":/Transliterator.png");
 
-    image.copy(transliteratorLibraryPath + "Transliterator_logo.png");
-    image.copy("/usr/share/icons/hicolor/256x256/apps/transliterator.png");
+    image.copy("/tmp/transliterator.png");
+    process.start("echo **** | sudo -S cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png");
+    process.waitForFinished();
+
+    process.start("rm /tmp/transliterator.png");
+    process.waitForFinished();
 }
 
 void MainWindow::installBinary()
 {
-    QFile binary("Transliterator");
-    binary.copy("/usr/bin/Transliterator");
+    QFile binary(":/Transliterator");
+    binary.copy("/tmp/transliterator");
+
+    process.start("echo **** | sudo -S cp /tmp/transliterator /usr/bin/transliterator");
+    process.waitForFinished();
+
+    process.start("rm /tmp/transliterator");
+    process.waitForFinished();
 }
