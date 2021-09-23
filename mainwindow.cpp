@@ -24,8 +24,7 @@ void MainWindow::installLibrary()
     installBinary();
     installIcon();
     installDesktopFile();
-
-    QProcess::execute("update-desktop-database ~/.local/share/applications");
+    updateDesktopDatabase();
 }
 
 void MainWindow::makeLibraryDirectory()
@@ -52,10 +51,16 @@ void MainWindow::installDesktopFile()
 
     QString installPath = "/usr/share/applications/transliterator.desktop";
 
-    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.png " + installPath + "\"";
+    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.desktop " + installPath + "\"";
     QProcess::execute(command);
 
     QProcess::execute("rm /tmp/transliterator.desktop");
+}
+
+void MainWindow::updateDesktopDatabase()
+{
+    QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S update-desktop-database ~/.local/share/applications";
+    QProcess::execute(command);
 }
 
 void MainWindow::installIcon()
