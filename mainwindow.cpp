@@ -37,6 +37,7 @@ void MainWindow::installDesktopFile()
 
     QString installPath = "/usr/share/applications/transliterator.desktop";
 
+    // copying file to installPath
     QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.desktop " + installPath + "\"";
     QProcess::execute(command);
 
@@ -57,6 +58,7 @@ void MainWindow::installIcon()
 
     QString installPath = "/usr/share/icons/hicolor/32x32/apps/transliterator.png";
 
+    // copying file to installPath
     QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator.png " + installPath + "\"";
     QProcess::execute(command);
 
@@ -70,6 +72,7 @@ void MainWindow::installBinary()
 
     QString installPath = "/usr/bin/transliterator";
 
+    // copying file to installPath
     QString command = "/bin/sh -c \"echo \"" + userPassword + "\" | sudo -S cp /tmp/transliterator " + installPath + "\"";
     QProcess::execute(command);
 
