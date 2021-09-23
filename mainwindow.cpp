@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    process.open(QIODevice::WriteOnly);
 }
 
 MainWindow::~MainWindow()
@@ -49,6 +51,7 @@ void MainWindow::installDesktopFile()
     desktopFile.copy("tmp/transliterator.desktop");
 
     process.start("sudo cp /tmp/transliterator.png /usr/share/applications/transliterator.desktop");
+    process.waitForReadyRead();
     process.write("****");
     process.waitForFinished();
 
@@ -63,6 +66,8 @@ void MainWindow::installIcon()
     image.copy("/tmp/transliterator.png");
 
     process.start("sudo cp /tmp/transliterator.png /usr/share/icons/hicolor/32x32/apps/transliterator.png");
+
+    process.waitForReadyRead();
     process.write("****");
     process.waitForFinished();
 
@@ -76,6 +81,7 @@ void MainWindow::installBinary()
     binary.copy("/tmp/transliterator");
 
     process.start("sudo cp /tmp/transliterator /usr/bin/transliterator");
+    process.waitForReadyRead();
     process.write("****");
     process.waitForFinished();
 
