@@ -80,7 +80,9 @@ void MainWindow::installBinary()
     QFile binary(":/Transliterator");
     binary.copy("/tmp/transliterator");
 
-    process.start("sudo cp /tmp/transliterator /usr/bin/transliterator");
+    process.setProgram("sudo");
+    process.setArguments({"cp", "/tmp/transliterator /usr/bin/transliterator"});
+    process.start(QIODevice::WriteOnly);
     process.waitForReadyRead();
     process.write("****");
     process.waitForFinished();
