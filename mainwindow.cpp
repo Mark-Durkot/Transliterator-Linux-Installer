@@ -22,8 +22,10 @@ void MainWindow::on_pushButton_install_clicked()
 void MainWindow::installLibrary()
 {
     installBinary();
-    installDesktopFile();
     installIcon();
+    installDesktopFile();
+
+    QProcess::execute("update-desktop-database ~/.local/share/applications");
 }
 
 void MainWindow::makeLibraryDirectory()
@@ -44,9 +46,9 @@ void MainWindow::linkFile(const QString &filename, const QString &aliasname)
 
 void MainWindow::installDesktopFile()
 {
-    QFile desktopFile("Transliterator.desktop");
+    QFile desktopFile(":/Transliterator.desktop");
 
-    desktopFile.copy("tmp/transliterator.desktop");
+    desktopFile.copy("/tmp/transliterator.desktop");
 
     QString installPath = "/usr/share/applications/transliterator.desktop";
 
