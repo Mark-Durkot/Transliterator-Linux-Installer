@@ -35,6 +35,7 @@ private:
     void installBinary();
     void installIcon();
     void installDesktopFile();
+    void updateDesktopDatabase();
 
     bool checkInstallation() const;
 
